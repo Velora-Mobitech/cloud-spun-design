@@ -1,152 +1,120 @@
-import { useState } from 'react'
-import { useToast } from '@/hooks/use-toast'
+import { motion } from 'framer-motion'
+import { Phone, Mail, MessageCircle, Clock } from 'lucide-react'
 
 export function Contact() {
-  const { toast } = useToast()
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      toast({ title: 'Please fill in all fields', variant: 'destructive' })
-      return
-    }
-    setIsSubmitting(true)
-    // Simulate submission — connect to a backend to actually send
-    setTimeout(() => {
-      toast({ title: 'Message sent!', description: "We'll get back to you soon." })
-      setFormData({ name: '', email: '', message: '' })
-      setIsSubmitting(false)
-    }, 1000)
-  }
+  const contactChannels = [
+    {
+      icon: Phone,
+      title: 'Call Us',
+      value: '+91 8876 XXXXXX',
+      description: '24/7 support during convocation period',
+    },
+    {
+      icon: Mail,
+      title: 'Email',
+      value: 'support@convocation2026.com',
+      description: 'Response within 2 hours',
+    },
+    {
+      icon: MessageCircle,
+      title: 'WhatsApp',
+      value: '+91 8876 XXXXXX',
+      description: 'Quick queries and instant booking support',
+    },
+    {
+      icon: Clock,
+      title: 'Available',
+      value: '24/7',
+      description: 'June 1 - July 15, 2026',
+    },
+  ]
 
   return (
-    <section id="contact" className="relative py-32 bg-card/30">
-      <div className="container mx-auto px-6 sm:px-8 lg:px-12">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="w-3 h-3 bg-accent-emerald rounded-full animate-pulse" />
-            <span className="text-sm font-semibold text-muted-foreground">
-              Let's Create Together
-            </span>
-            <div className="w-3 h-3 bg-accent-blue rounded-full animate-pulse" />
-          </div>
-          
-          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight mb-8">
-            <span className="block mb-2">Ready to Light Up the Screen?</span>
-          </h2>
-          
-          <p className="text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            Tell us about your project and we'll get back to you with a plan to bring your vision to cinematic reality
+    <section id="contact" className="relative py-20 sm:py-32 bg-gradient-to-br from-accent-maroon to-accent-burgundy text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16 sm:mb-24"
+        >
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-6">Get In Touch</h2>
+          <p className="text-lg text-white/90 max-w-2xl mx-auto">
+            Have questions? Our support team is ready to help you with your convocation travel plans.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Contact Form */}
-        <div className="max-w-3xl mx-auto">
-          <div className="bg-background clean-border rounded-3xl overflow-hidden elevated-shadow">
-            <div className="bg-card/50 px-8 py-6 border-b border-border">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-xl font-black text-foreground mb-1">
-                    Get In Touch
-                  </h3>
-                  <p className="text-muted-foreground">
-                    Fill out the form and we'll respond within 24 hours
-                  </p>
-                </div>
-                <div className="hidden sm:flex items-center space-x-2">
-                  <div className="w-3 h-3 bg-accent-emerald rounded-full" />
-                  <span className="text-sm text-muted-foreground font-medium">Available now</span>
-                </div>
-              </div>
-            </div>
-            
-            <form onSubmit={handleSubmit} className="p-8 space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-semibold text-foreground mb-2">Name</label>
-                  <input
-                    id="name"
-                    type="text"
-                    maxLength={100}
-                    value={formData.name}
-                    onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                    className="w-full px-4 py-3 rounded-xl bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent-blue/50 transition-all"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-foreground mb-2">Email</label>
-                  <input
-                    id="email"
-                    type="email"
-                    maxLength={255}
-                    value={formData.email}
-                    onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                    className="w-full px-4 py-3 rounded-xl bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent-blue/50 transition-all"
-                    placeholder="your@email.com"
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-semibold text-foreground mb-2">Message</label>
-                <textarea
-                  id="message"
-                  rows={5}
-                  maxLength={1000}
-                  value={formData.message}
-                  onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
-                  className="w-full px-4 py-3 rounded-xl bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent-blue/50 transition-all resize-none"
-                  placeholder="Tell us about your project..."
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-4 rounded-xl bg-foreground text-background font-black text-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+        {/* Contact Channels */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 sm:mb-24">
+          {contactChannels.map((channel, index) => {
+            const Icon = channel.icon
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center hover:bg-white/20 transition"
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </button>
-            </form>
-          </div>
+                <div className="flex justify-center mb-4">
+                  <div className="w-12 h-12 bg-accent-gold text-accent-maroon rounded-full flex items-center justify-center">
+                    <Icon className="w-6 h-6" />
+                  </div>
+                </div>
+                <h3 className="font-bold text-lg mb-2">{channel.title}</h3>
+                <p className="text-accent-gold font-semibold mb-2">{channel.value}</p>
+                <p className="text-white/70 text-sm">{channel.description}</p>
+              </motion.div>
+            )
+          })}
         </div>
 
-        {/* Bottom Info */}
-        <div className="text-center mt-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="bg-background clean-border rounded-2xl p-6 subtle-shadow">
-              <div className="w-12 h-12 bg-accent-blue/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-6 h-6 bg-accent-blue rounded-full" />
-              </div>
-              <h4 className="font-black text-foreground mb-2">Project Discussion</h4>
-              <p className="text-muted-foreground text-sm">
-                Share your vision and requirements with our team
-              </p>
+        {/* Quick Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 sm:p-12"
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-accent-gold text-3xl sm:text-4xl font-black mb-2">5000+</div>
+              <p className="text-white/80">Bookings Confirmed</p>
             </div>
-            
-            <div className="bg-background clean-border rounded-2xl p-6 subtle-shadow">
-              <div className="w-12 h-12 bg-accent-emerald/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-6 h-6 bg-accent-emerald rounded-full" />
-              </div>
-              <h4 className="font-black text-foreground mb-2">Custom Strategy</h4>
-              <p className="text-muted-foreground text-sm">
-                Get a tailored approach for your unique project
-              </p>
+            <div>
+              <div className="text-accent-gold text-3xl sm:text-4xl font-black mb-2">4.9★</div>
+              <p className="text-white/80">Average Rating</p>
             </div>
-            
-            <div className="bg-background clean-border rounded-2xl p-6 subtle-shadow">
-              <div className="w-12 h-12 bg-accent-purple/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-6 h-6 bg-accent-purple rounded-full" />
-              </div>
-              <h4 className="font-black text-foreground mb-2">Next Steps</h4>
-              <p className="text-muted-foreground text-sm">
-                Clear timeline and roadmap to bring your idea to life
-              </p>
+            <div>
+              <div className="text-accent-gold text-3xl sm:text-4xl font-black mb-2">2 hrs</div>
+              <p className="text-white/80">Avg Response Time</p>
+            </div>
+            <div>
+              <div className="text-accent-gold text-3xl sm:text-4xl font-black mb-2">50+</div>
+              <p className="text-white/80">Professional Drivers</p>
             </div>
           </div>
-        </div>
+        </motion.div>
+
+        {/* Emergency Support */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="mt-16 sm:mt-24 bg-accent-gold text-accent-maroon rounded-2xl p-8 sm:p-12 text-center"
+        >
+          <h3 className="text-2xl font-bold mb-3">Emergency Support?</h3>
+          <p className="mb-6 font-semibold">Call our emergency hotline immediately</p>
+          <a
+            href="tel:+918876XXXXXX"
+            className="inline-block text-3xl font-black hover:scale-105 transition"
+          >
+            +91 8876 XXXXXX
+          </a>
+        </motion.div>
       </div>
     </section>
   )
