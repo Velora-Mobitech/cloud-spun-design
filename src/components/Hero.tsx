@@ -64,24 +64,15 @@ export function Hero() {
 
   return (
     <div className="relative min-h-screen bg-background overflow-hidden">
-      {/* Background Video */}
-      <div className="absolute inset-0 w-full h-full">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-transparent z-10" />
-        <video
-          ref={videoRef}
-          className="w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1920&q=80"
-        >
-          <source
-            src="https://videos.unsplash.com/video-1492684223066-81342ee5ff30?w=1920&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
-            type="video/mp4"
-          />
-        </video>
-      </div>
+      {/* Background Image */}
+<div className="absolute inset-0 w-full h-full">
+  <img
+    src="/MAIN2.jpg"
+    alt="IIT Guwahati campus"
+    className="w-full h-full object-cover"
+  />
+  <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-black/50" />
+</div>
 
       {/* Navigation */}
       <nav
@@ -191,21 +182,51 @@ export function Hero() {
               Book My Ride
             </Button>
             <Button
-              onClick={() => document.getElementById('travel-options')?.scrollIntoView({ behavior: 'smooth' })}
-              size="lg"
-              variant="outline"
-              className="border-white text-white hover:bg-white/10 font-bold text-lg h-14 px-8 rounded-lg"
-            >
-              Explore Options
-            </Button>
+  onClick={() => document.getElementById('travel-options')?.scrollIntoView({ behavior: 'smooth' })}
+  size="lg"
+  variant="outline"
+  className="border-white bg-transparent text-white hover:bg-white/10 hover:text-white font-bold text-lg h-14 px-8 rounded-lg"
+>
+  Explore Options
+</Button>
           </div>
+
+          {/* Countdown Timer */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45 }}
+            className="mx-auto mt-4"
+          >
+            <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3 max-w-[260px] mx-auto">
+              <p className="text-white/80 text-xs mb-2 font-medium">Convocation in</p>
+              <div className="grid grid-cols-4 gap-2">
+                <div className="text-center">
+                  <p className="text-lg font-bold text-accent-gold">{countdown.days}</p>
+                  <p className="text-[10px] text-white/70">Days</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-lg font-bold text-accent-gold">{countdown.hours}</p>
+                  <p className="text-[10px] text-white/70">Hours</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-lg font-bold text-accent-gold">{countdown.minutes}</p>
+                  <p className="text-[10px] text-white/70">Mins</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-lg font-bold text-accent-gold">{countdown.seconds}</p>
+                  <p className="text-[10px] text-white/70">Secs</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
 
           {/* Pricing Display */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="bg-black/30 backdrop-blur-md border border-white/20 rounded-2xl p-6 mt-8 max-w-2xl mx-auto"
+            className="bg-black/30 backdrop-blur-md border border-white/20 rounded-2xl p-6 mt-4 max-w-2xl mx-auto"
           >
             <p className="text-sm text-white/80 mb-4">Starting from</p>
             <div className="grid grid-cols-3 gap-4 text-center">
@@ -223,36 +244,6 @@ export function Hero() {
               </div>
             </div>
           </motion.div>
-        </motion.div>
-
-        {/* Countdown Timer */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="absolute bottom-32 left-0 right-0 mx-auto"
-        >
-          <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-2xl p-6 max-w-xs mx-auto">
-            <p className="text-white/80 text-sm mb-4 font-medium">Convocation in</p>
-            <div className="grid grid-cols-4 gap-3">
-              <div className="text-center">
-                <p className="text-2xl font-bold text-accent-gold">{countdown.days}</p>
-                <p className="text-xs text-white/70">Days</p>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl font-bold text-accent-gold">{countdown.hours}</p>
-                <p className="text-xs text-white/70">Hours</p>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl font-bold text-accent-gold">{countdown.minutes}</p>
-                <p className="text-xs text-white/70">Mins</p>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl font-bold text-accent-gold">{countdown.seconds}</p>
-                <p className="text-xs text-white/70">Secs</p>
-              </div>
-            </div>
-          </div>
         </motion.div>
 
         {/* Scroll Indicator */}

@@ -114,9 +114,9 @@ export function TravelOptions() {
                 </ul>
 
                 {/* Button */}
-                <Button className="w-full bg-accent-maroon hover:bg-accent-burgundy text-white font-semibold rounded-lg">
+                {/* <Button className="w-full bg-accent-maroon hover:bg-accent-burgundy text-white font-semibold rounded-lg">
                   Select This Option
-                </Button>
+                </Button> */}
               </motion.div>
             )
           })}
